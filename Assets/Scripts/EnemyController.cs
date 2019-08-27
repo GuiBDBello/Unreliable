@@ -9,17 +9,11 @@ public class EnemyController : MonoBehaviour
     // Adjust the speed for the application.
     public float moveSpeed = 0F;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         // Move our position a step closer to the target.
-        float moveDistance = moveSpeed * Time.deltaTime; // calculate distance to move
+        float moveDistance = moveSpeed * Time.deltaTime;
         this.transform.position = Vector3.MoveTowards(this.transform.position, this.target.transform.position, moveDistance);
     }
 
@@ -27,7 +21,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == Tags.Player)
         {
-            Debug.Log("Colidiu!");
+            Debug.Log("Collided with the Player!");
         }
     }
 }
