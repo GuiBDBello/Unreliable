@@ -9,13 +9,13 @@ public class CameraController : MonoBehaviour
 
     private float xAxisClamp = 0.0f;
 
-    void Awake()
+    private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Show cursor
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         this.RotateCamera();
     }
 
-    void RotateCamera()
+    private void RotateCamera()
     {
         float MouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float MouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
