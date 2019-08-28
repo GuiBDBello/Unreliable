@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private int enemyLevel;
     private GameObject target;
     private Renderer renderer;
+    private bool isShooting;
 
     private void Start()
     {
@@ -19,17 +20,18 @@ public class EnemyController : MonoBehaviour
         this.enemyLevel = 1;
         this.target = GameObject.FindGameObjectWithTag(Tags.Player);
         this.renderer = this.GetComponent<Renderer>();
+        this.isShooting = false;
+    }
+
+    private void Update()
+    {
+        if (this.renderer.material.color.g <= 0)
+            this.Upgrade();
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        //this.transform.forward = GameObject.FindGameObjectWithTag(Tags.Player).transform.position;//this.target.transform.position;
-        Debug.DrawLine(this.transform.position, this.transform.forward);
-
-        if (this.renderer.material.color.g <= 0)
-            this.Upgrade();
-
         switch (enemyLevel)
         {
             case 1:
@@ -37,7 +39,7 @@ public class EnemyController : MonoBehaviour
                 break;
             case 2:
                 this.MoveTowardsTarget();
-                this.Shoot();
+                this.StartShootCoroutine();
                 break;
             default:
                 this.MoveTowardsTarget();
@@ -57,22 +59,25 @@ public class EnemyController : MonoBehaviour
     {
         // Move our position a step closer to the target.
         this.moveDistance = moveSpeed * Time.deltaTime;
-        //this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, moveDistance);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, moveDistance);
         this.transform.LookAt(target.transform.position);
     }
 
     private void Upgrade()
     {
-        switch(enemyLevel)
+        enemyLevel++;
+
+        switch (enemyLevel)
         {
-            default:
+            case 2:
                 moveSpeed /= 2;
                 break;
+            default:
+                break;
         }
+
         this.renderer.material.color = new Color(renderer.material.color.r, 1F, renderer.material.color.b);
         this.transform.localScale += new Vector3(1F, 1F, 1F);
-
-        enemyLevel++;
     }
 
     public void TakeHit()
@@ -80,9 +85,17 @@ public class EnemyController : MonoBehaviour
         renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g - 0.1F, renderer.material.color.b);
     }
 
-    public void Shoot()
+    private IEnumerator Shoot(float waitTime)
     {
-        Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + (Vector3.forward.magnitude * this.transform.localScale.z));
+        this.isShooting = true;
+        yield return new WaitForSeconds(waitTime);
         Instantiate(enemyBullet, (this.transform.position + this.transform.forward), Quaternion.identity);
+        this.isShooting = false;
+    }
+
+    private void StartShootCoroutine()
+    {
+        if (!this.isShooting)
+            this.StartCoroutine(this.Shoot(2F));
     }
 }
