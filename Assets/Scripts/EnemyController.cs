@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
         renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g - 0.1F, renderer.material.color.b);
     }
 
-    private IEnumerator Shoot(float waitTime)
+    private IEnumerator ShootCoroutine(float waitTime)
     {
         this.isShooting = true;
         yield return new WaitForSeconds(waitTime);
@@ -96,6 +96,6 @@ public class EnemyController : MonoBehaviour
     private void StartShootCoroutine()
     {
         if (!this.isShooting)
-            this.StartCoroutine(this.Shoot(2F));
+            this.StartCoroutine(this.ShootCoroutine(2F));
     }
 }
