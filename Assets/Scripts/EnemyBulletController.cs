@@ -2,29 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class EnemyBulletController : MonoBehaviour
 {
     private Rigidbody rigidbody;
-    private Transform cameraTransform;
+    private Transform playerTransform;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         this.rigidbody = GetComponent<Rigidbody>();
-        this.cameraTransform = GameObject.FindGameObjectWithTag(Tags.MainCamera).transform;
+        this.playerTransform = GameObject.FindGameObjectWithTag(Tags.Player).transform;
+        this.transform.LookAt(playerTransform.position);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        this.rigidbody.MovePosition(this.transform.position + this.cameraTransform.forward);
+        this.rigidbody.MovePosition(this.transform.position + this.transform.forward);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.tag) {
-            case Tags.Enemy:
-                other.GetComponent<EnemyController>().TakeHit();
+        switch (other.tag)
+        {
+            case Tags.Player:
+                other.GetComponent<PlayerController>().TakeHit(this.transform.position);
                 Destroy(this.gameObject);
                 break;
             case Tags.Scenery:

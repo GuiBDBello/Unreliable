@@ -179,11 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2926688999188991722, guid: 827fd112654d5d041b70b00df3a3675d,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 49052365}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 827fd112654d5d041b70b00df3a3675d, type: 3}
 --- !u!1 &32436141
@@ -399,7 +394,8 @@ MonoBehaviour:
   speed: 10
   jumpSpeed: 8
   gravity: 20
-  bullet: {fileID: 2934423271546535702, guid: d05422b28a840764b996021572a9515d, type: 3}
+  playerBullet: {fileID: 2934423271546535702, guid: d05422b28a840764b996021572a9515d,
+    type: 3}
   textHealth: {fileID: 1469668930}
 --- !u!1 &170076733
 GameObject:
@@ -1046,11 +1042,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2926688999188991722, guid: 827fd112654d5d041b70b00df3a3675d,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 49052365}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 827fd112654d5d041b70b00df3a3675d, type: 3}
 --- !u!1001 &2926688997798249861
@@ -1118,16 +1109,6 @@ PrefabInstance:
     - target: {fileID: 2926688999188991720, guid: 827fd112654d5d041b70b00df3a3675d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926688999188991722, guid: 827fd112654d5d041b70b00df3a3675d,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 49052365}
-    - target: {fileID: 2926688999188991723, guid: 827fd112654d5d041b70b00df3a3675d,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

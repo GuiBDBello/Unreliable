@@ -8,24 +8,24 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    public GameObject bullet;
+    public GameObject playerBullet;
     public Text textHealth;
 
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
 
-    private int health = 3;
+    private int health;
 
     // Start is called before the first frame update
     private void Start()
     {
         this.characterController = GetComponent<CharacterController>();
-        this.textHealth.text = health.ToString();
+        this.health = 3;
+        this.textHealth.text = this.health.ToString();
     }
 
     private void FixedUpdate()
     {
-        // Move the player
         this.MovePlayer();
 
         // Shoot with the left mouse button
@@ -57,19 +57,20 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(this.bullet, this.transform.position, Quaternion.identity);
+        Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + this.characterController.radius);
+        Instantiate(playerBullet, position, Quaternion.identity);
     }
 
-    public void TakeDamage(Vector3 direction)
+    public void TakeHit(Vector3 direction)
     {
-        this.health--;
         this.characterController.Move(direction.normalized * Time.deltaTime * 200.0F);
+
+        this.health--;
         this.textHealth.text = health.ToString();
     }
 
     private void GameOver()
     {
-        this.health = 0;
         Time.timeScale = 0;
     }
 }
