@@ -396,11 +396,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e5e99a5561a14498a02f3f49a8b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2934423271546535702, guid: d05422b28a840764b996021572a9515d, type: 3}
-  textHealth: {fileID: 1469668930}
   speed: 10
   jumpSpeed: 8
   gravity: 20
+  bullet: {fileID: 2934423271546535702, guid: d05422b28a840764b996021572a9515d, type: 3}
+  textHealth: {fileID: 1469668930}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0

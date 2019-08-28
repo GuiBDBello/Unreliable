@@ -24,7 +24,7 @@ public class BulletController : MonoBehaviour
     {
         switch (other.tag) {
             case Tags.Enemy:
-                //Destroy(other.gameObject);
+                other.GetComponent<EnemyController>().TakeHit();
                 Destroy(this.gameObject);
                 break;
             case Tags.Scenery:
