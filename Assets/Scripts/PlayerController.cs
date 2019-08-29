@@ -24,15 +24,18 @@ public class PlayerController : MonoBehaviour
         this.textHealth.text = this.health.ToString();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        this.MovePlayer();
-
         // Shoot with the left mouse button
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             this.Shoot();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        this.MovePlayer();
 
         if (this.health <= 0)
         {

@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
 
     private float xAxisClamp = 0.0f;
 
-    private void Awake()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
