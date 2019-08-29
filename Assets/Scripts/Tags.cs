@@ -6,6 +6,7 @@ public class Tags : MonoBehaviour
     public const string Enemy = "Enemy";
     public const string EnemyGenerator = "EnemyGenerator";
     public const string MainCamera = "MainCamera";
+    public const string Music = "Music";
     public const string Player = "Player";
-    public const string Scenery = "Scenery";
+    public const string Scenario = "Scenario";
 }

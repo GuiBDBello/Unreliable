@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Scenario
   - EnemyGenerator
+  - Music
   layers:
   - Default
   - TransparentFX

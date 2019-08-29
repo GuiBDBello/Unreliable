@@ -29,7 +29,11 @@ public class EnemyBulletController : MonoBehaviour
                 other.GetComponent<PlayerController>().TakeHit(this.transform.position);
                 Destroy(this.gameObject);
                 break;
-            case Tags.Scenery:
+            case Tags.Enemy:
+                Destroy(other.gameObject);
+                Destroy(this.gameObject);
+                break;
+            case Tags.Scenario:
                 Destroy(this.gameObject);
                 break;
             default:

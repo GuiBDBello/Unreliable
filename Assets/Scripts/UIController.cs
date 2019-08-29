@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour
     public GameObject playerHUD;
 
     CameraController cameraController;
-    GameObject[] enemyGenerators;
+    GameObject enemyGenerators;
 
     private void Awake()
     {
@@ -18,7 +18,8 @@ public class UIController : MonoBehaviour
         this.cameraController = GameObject.FindGameObjectWithTag(Tags.MainCamera).GetComponent<CameraController>();
         this.cameraController.enabled = false;
 
-        this.enemyGenerators = GameObject.FindGameObjectsWithTag(Tags.EnemyGenerator);
+        this.enemyGenerators = GameObject.FindGameObjectWithTag(Tags.EnemyGenerator);
+        this.enemyGenerators.gameObject.SetActive(false);
     }
 
     public void OnButtonPlayPressed()
@@ -27,10 +28,7 @@ public class UIController : MonoBehaviour
         playerHUD.SetActive(true);
 
         this.cameraController.enabled = true;
-        foreach (GameObject enemyGenerator in this.enemyGenerators)
-        {
-            enemyGenerator.gameObject.SetActive(true);
-        }
+        this.enemyGenerators.gameObject.SetActive(true);
     }
 
     public void OnButtonExitPressed()

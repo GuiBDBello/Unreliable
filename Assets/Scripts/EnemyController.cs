@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
                 break;
             default:
                 this.MoveTowardsTarget();
+                this.StopCoroutine("ShootCoroutine");
                 break;
         }
     }
