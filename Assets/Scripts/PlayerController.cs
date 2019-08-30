@@ -5,23 +5,26 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [HideInInspector]
+    public bool isDead;
+
     public float speed = 10.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public GameObject playerBullet;
     public Text textHealth;
 
+    private int health;
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
-
-    private int health;
 
     // Start is called before the first frame update
     private void Start()
     {
         this.characterController = GetComponent<CharacterController>();
         this.health = 3;
-        this.textHealth.text = "Health: " + this.health.ToString();
+        textHealth.text = "Health: " + this.health.ToString();
+        this.isDead = false;
     }
 
     private void Update()
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
+        this.isDead = true;
         Time.timeScale = 0;
     }
 }
