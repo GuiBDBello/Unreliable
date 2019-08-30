@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float moveSpeed = 0F;
+    [HideInInspector]
+    public int enemyLevel;
+
+    public float kamikazeSpeed = 5000F;
     public GameObject enemyBullet;
 
+    private float moveSpeed;
     private float moveDistance;
-    private int enemyLevel;
+    private bool isShooting;
+    private bool isKamikazeing;
     private GameObject target;
     private Renderer renderer;
-    private bool isShooting;
+    private Rigidbody rigidbody;
 
     private void Start()
     {
-        moveSpeed = Random.Range(moveSpeed / 2F, moveSpeed * 2F);
+        this.moveSpeed = Random.Range(moveSpeed / 2F, moveSpeed * 2F);
 
         this.enemyLevel = 1;
+        this.isShooting = false;
+        this.isKamikazeing = false;
+
         this.target = GameObject.FindGameObjectWithTag(Tags.Player);
         this.renderer = this.GetComponent<Renderer>();
-        this.isShooting = false;
+        this.rigidbody = this.GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        if (this.renderer.material.color.g <= 0)
+        Debug.DrawLine(this.transform.position, target.transform.position);
+
+        if (this.renderer.material.color.g <= 0F)
             this.Upgrade();
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        switch (enemyLevel)
+        switch (this.enemyLevel)
         {
             case 1:
                 this.MoveTowardsTarget();
@@ -41,49 +51,42 @@ public class EnemyController : MonoBehaviour
                 this.MoveTowardsTarget();
                 this.StartShootCoroutine();
                 break;
-            default:
+            case 3:
                 this.MoveTowardsTarget();
-                this.StopCoroutine("ShootCoroutine");
+                this.StartKamikazeCoroutine();
                 break;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == Tags.Player)
+        GameObject other = collision.gameObject;
+
+        if (other.tag == Tags.Player)
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeHit(this.transform.position);
+            other.GetComponent<PlayerController>().TakeHit(this.transform.position);
+        } else if (other.tag == Tags.Enemy)
+        {
+            if (this.enemyLevel == 3)
+            {
+                if (other.GetComponent<EnemyController>().enemyLevel == 1)
+                {
+                    UIController.score += 10;
+                } else if (other.GetComponent<EnemyController>().enemyLevel == 2)
+                {
+                    UIController.score += 50;
+                } else {
+                    UIController.score += 250;
+                }
+                Destroy(other);
+            }
         }
     }
 
-    private void MoveTowardsTarget()
+    private void StartShootCoroutine()
     {
-        // Move our position a step closer to the target.
-        this.moveDistance = moveSpeed * Time.deltaTime;
-        this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, moveDistance);
-        this.transform.LookAt(target.transform.position);
-    }
-
-    private void Upgrade()
-    {
-        enemyLevel++;
-
-        switch (enemyLevel)
-        {
-            case 2:
-                moveSpeed /= 2;
-                break;
-            default:
-                break;
-        }
-
-        this.renderer.material.color = new Color(renderer.material.color.r, 1F, renderer.material.color.b);
-        this.transform.localScale += new Vector3(1F, 1F, 1F);
-    }
-
-    public void TakeHit()
-    {
-        renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g - 0.1F, renderer.material.color.b);
+        if (!this.isShooting)
+            this.StartCoroutine(this.ShootCoroutine(2F));
     }
 
     private IEnumerator ShootCoroutine(float waitTime)
@@ -94,9 +97,55 @@ public class EnemyController : MonoBehaviour
         this.isShooting = false;
     }
 
-    private void StartShootCoroutine()
+    private void StartKamikazeCoroutine()
     {
-        if (!this.isShooting)
-            this.StartCoroutine(this.ShootCoroutine(2F));
+        if (!this.isKamikazeing)
+            this.StartCoroutine(this.KamikazeCoroutine(5F));
+    }
+
+    private IEnumerator KamikazeCoroutine(float waitTime)
+    {
+        this.isKamikazeing = true;
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log((target.transform.position - this.transform.position).normalized * kamikazeSpeed);
+        this.rigidbody.AddForce((target.transform.position - this.transform.position).normalized * kamikazeSpeed);
+        this.isKamikazeing = false;
+    }
+
+    private void MoveTowardsTarget()
+    {
+        // Move our position a step closer to the target.
+        this.moveDistance = this.moveSpeed * Time.deltaTime;
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, this.moveDistance);
+        this.transform.LookAt(target.transform.position);
+    }
+
+    private void Upgrade()
+    {
+        if (this.enemyLevel < 3)
+            this.enemyLevel++;
+
+        switch (this.enemyLevel)
+        {
+            case 2:
+                this.moveSpeed /= 2;
+                this.renderer.material.color = new Color(this.renderer.material.color.r, 1F, this.renderer.material.color.b);
+                this.transform.localScale += new Vector3(1F, 1F, 1F);
+                break;
+            case 3:
+                this.moveSpeed /= 2;
+                this.renderer.material.color = Color.gray;
+                this.transform.localScale += new Vector3(1F, 1F, 1F);
+                this.StopAllCoroutines();
+                break;
+        }
+    }
+
+    public void TakeHit()
+    {
+        if (this.renderer.material.color != Color.gray)
+        {
+            this.renderer.material.color = new Color(this.renderer.material.color.r, this.renderer.material.color.g - 0.2F, this.renderer.material.color.b);
+        }
     }
 }

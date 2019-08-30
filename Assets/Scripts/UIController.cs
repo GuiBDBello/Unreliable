@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public static int score;
     public GameObject mainMenu;
     public GameObject playerHUD;
     public AudioClip menuMusic;

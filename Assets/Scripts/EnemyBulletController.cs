@@ -30,6 +30,16 @@ public class EnemyBulletController : MonoBehaviour
                 Destroy(this.gameObject);
                 break;
             case Tags.Enemy:
+                if (other.GetComponent<EnemyController>().enemyLevel == 1)
+                {
+                    UIController.score += 25;
+                } else if (other.GetComponent<EnemyController>().enemyLevel == 1)
+                {
+                    UIController.score += 75;
+                } else
+                {
+                    UIController.score += 150;
+                }
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
                 break;
