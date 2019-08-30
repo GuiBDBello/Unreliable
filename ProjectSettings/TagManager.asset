@@ -10,6 +10,7 @@ TagManager:
   - EnemyGenerator
   - Music
   - Notification
+  - Score
   layers:
   - Default
   - TransparentFX

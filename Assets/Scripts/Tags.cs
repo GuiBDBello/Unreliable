@@ -10,4 +10,5 @@ public class Tags : MonoBehaviour
     public const string Notification = "Notification";
     public const string Player = "Player";
     public const string Scenario = "Scenario";
+    public const string Score = "Score";
 }

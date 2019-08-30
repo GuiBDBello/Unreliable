@@ -40,6 +40,7 @@ public class EnemyBulletController : MonoBehaviour
                 {
                     UIController.score += 150;
                 }
+                UIController.UpdateScore();
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
                 break;

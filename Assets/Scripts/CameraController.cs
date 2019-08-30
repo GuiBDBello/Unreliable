@@ -9,20 +9,9 @@ public class CameraController : MonoBehaviour
 
     private float xAxisClamp = 0.0f;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     // Update is called once per frame
     private void Update()
     {
-        // Show cursor
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-
         this.RotateCamera();
     }
 

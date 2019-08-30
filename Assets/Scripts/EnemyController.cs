@@ -79,6 +79,7 @@ public class EnemyController : MonoBehaviour
                 } else {
                     UIController.score += 250;
                 }
+                UIController.UpdateScore();
                 Destroy(other);
             }
         }

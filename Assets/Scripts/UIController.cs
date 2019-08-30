@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     public static int score;
+    public static Text textScore;
+
     public GameObject mainMenu;
     public GameObject playerHUD;
     public GameObject gameOverMenu;
@@ -43,12 +46,22 @@ public class UIController : MonoBehaviour
     {
         this.notification.StartShowNotificationCoroutine(0.5F);
         this.ShowGameOverMenu();
+
+        // Show cursor
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void OnButtonPlayPressed()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         mainMenu.SetActive(false);
         playerHUD.SetActive(true);
+
+        textScore = GameObject.FindGameObjectWithTag(Tags.Score).GetComponent<Text>();
 
         this.cameraController.enabled = true;
         this.enemyGenerators.gameObject.SetActive(true);
@@ -63,6 +76,8 @@ public class UIController : MonoBehaviour
 
     public void OnButtonRestartPressed()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -71,7 +86,21 @@ public class UIController : MonoBehaviour
     {
         if (playerController.isDead)
         {
+            Cursor.lockState = CursorLockMode.None;
+
+            playerHUD.SetActive(false);
             gameOverMenu.SetActive(true);
+
+            textScore = GameObject.FindGameObjectWithTag(Tags.Score).GetComponent<Text>();
+            UIController.UpdateScore();
+
+            this.cameraController.enabled = false;
+            this.enemyGenerators.gameObject.SetActive(false);
         }
+    }
+
+    public static void UpdateScore()
+    {
+        UIController.textScore.text = "Score: " + UIController.score.ToString();
     }
 }

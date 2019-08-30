@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         if (this.health <= 0)
         {
             this.GameOver();
+            UIController.UpdateScore();
         }
     }
 
