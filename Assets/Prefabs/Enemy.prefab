@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2acfc1843b4e25429fd36212237fb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLevel: 0
   moveSpeed: 5
+  kamikazeSpeed: 5000
   enemyBullet: {fileID: 1863410909797348751, guid: c94d5f32b59904e43989d9cc87c1be84,
     type: 3}

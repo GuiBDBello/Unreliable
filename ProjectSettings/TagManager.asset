@@ -9,6 +9,7 @@ TagManager:
   - Scenario
   - EnemyGenerator
   - Music
+  - Notification
   layers:
   - Default
   - TransparentFX

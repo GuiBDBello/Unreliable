@@ -7,10 +7,10 @@ public class EnemyController : MonoBehaviour
     [HideInInspector]
     public int enemyLevel;
 
-    public float kamikazeSpeed = 5000F;
+    public float moveSpeed;
+    public float kamikazeSpeed;
     public GameObject enemyBullet;
 
-    private float moveSpeed;
     private float moveDistance;
     private bool isShooting;
     private bool isKamikazeing;
@@ -20,9 +20,10 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        this.moveSpeed = Random.Range(moveSpeed / 2F, moveSpeed * 2F);
-
         this.enemyLevel = 1;
+        this.moveSpeed = 5F;
+        this.moveSpeed = Random.Range(moveSpeed / 2F, moveSpeed * 2F);
+        this.kamikazeSpeed = 5000F;
         this.isShooting = false;
         this.isKamikazeing = false;
 
@@ -107,7 +108,6 @@ public class EnemyController : MonoBehaviour
     {
         this.isKamikazeing = true;
         yield return new WaitForSeconds(waitTime);
-        Debug.Log((target.transform.position - this.transform.position).normalized * kamikazeSpeed);
         this.rigidbody.AddForce((target.transform.position - this.transform.position).normalized * kamikazeSpeed);
         this.isKamikazeing = false;
     }

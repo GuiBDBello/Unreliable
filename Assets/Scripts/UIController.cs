@@ -10,9 +10,10 @@ public class UIController : MonoBehaviour
     public AudioClip menuMusic;
     public AudioClip gameMusic;
 
-    CameraController cameraController;
-    GameObject enemyGenerators;
-    GameObject music;
+    private CameraController cameraController;
+    private GameObject enemyGenerators;
+    private GameObject music;
+    private Notification notification;
 
     private void Awake()
     {
@@ -28,6 +29,13 @@ public class UIController : MonoBehaviour
         this.music = GameObject.FindGameObjectWithTag(Tags.Music);
         this.music.GetComponent<AudioSource>().clip = menuMusic;
         this.music.GetComponent<AudioSource>().Play();
+
+        this.notification = GameObject.FindGameObjectWithTag(Tags.Notification).GetComponent<Notification>();
+    }
+
+    private void Update()
+    {
+        this.notification.StartShowNotificationCoroutine(0.5F);
     }
 
     public void OnButtonPlayPressed()
@@ -45,5 +53,4 @@ public class UIController : MonoBehaviour
     {
         Application.Quit();
     }
-
 }

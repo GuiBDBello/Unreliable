@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         this.characterController = GetComponent<CharacterController>();
         this.health = 3;
-        this.textHealth.text = this.health.ToString();
+        this.textHealth.text = "Health: " + this.health.ToString();
     }
 
     private void Update()
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         this.characterController.Move(direction.normalized * Time.deltaTime * 200.0F);
 
         this.health--;
-        this.textHealth.text = health.ToString();
+        this.textHealth.text = "Health: " + this.health.ToString();
     }
 
     private void GameOver()
