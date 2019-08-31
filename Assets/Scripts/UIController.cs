@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject mainMenu;
     public GameObject playerHUD;
     public GameObject gameOverMenu;
+    public GameObject pauseMenu;
     public AudioClip menuMusic;
     public AudioClip gameMusic;
 
@@ -21,11 +22,15 @@ public class UIController : MonoBehaviour
     private Notification notification;
     private PlayerController playerController;
 
-    private void Awake()
+    private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 1;
+
         mainMenu.SetActive(true);
         playerHUD.SetActive(false);
         gameOverMenu.SetActive(false);
+        pauseMenu.SetActive(false);
 
         this.cameraController = GameObject.FindGameObjectWithTag(Tags.MainCamera).GetComponent<CameraController>();
         this.cameraController.enabled = false;
@@ -48,9 +53,14 @@ public class UIController : MonoBehaviour
         this.ShowGameOverMenu();
 
         // Show cursor
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && playerHUD.activeSelf)
         {
             Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+
+            pauseMenu.SetActive(true);
+
+            this.cameraController.enabled = false;
         }
     }
 
@@ -60,6 +70,7 @@ public class UIController : MonoBehaviour
 
         mainMenu.SetActive(false);
         playerHUD.SetActive(true);
+        pauseMenu.SetActive(false);
 
         textScore = GameObject.FindGameObjectWithTag(Tags.Score).GetComponent<Text>();
 
@@ -76,10 +87,17 @@ public class UIController : MonoBehaviour
 
     public void OnButtonRestartPressed()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnButtonResumePressed()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+
+        pauseMenu.SetActive(false);
+
+        this.cameraController.enabled = true;
     }
 
     private void ShowGameOverMenu()
@@ -87,6 +105,7 @@ public class UIController : MonoBehaviour
         if (playerController.isDead)
         {
             Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
 
             playerHUD.SetActive(false);
             gameOverMenu.SetActive(true);

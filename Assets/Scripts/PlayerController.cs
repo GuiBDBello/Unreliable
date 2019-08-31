@@ -79,6 +79,5 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         this.isDead = true;
-        Time.timeScale = 0;
     }
 }
