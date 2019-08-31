@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2926688999188991726}
   - component: {fileID: 2926688999188991727}
   - component: {fileID: 2926688999188991723}
+  - component: {fileID: 8067943863048763108}
   - component: {fileID: 2926688999188991722}
   m_Layer: 0
   m_Name: Enemy
@@ -109,6 +110,102 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &8067943863048763108
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2926688999188991724}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2926688999188991722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,3 +223,9 @@ MonoBehaviour:
   kamikazeSpeed: 3000
   enemyBullet: {fileID: 1531129357254767843, guid: c94d5f32b59904e43989d9cc87c1be84,
     type: 3}
+  spawnAudio: {fileID: 8300000, guid: 4534b040996890c45a9fe9a5afe58f95, type: 3}
+  shootAudio: {fileID: 8300000, guid: 77e1a4a0bd67fdd4892202af04ee53d3, type: 3}
+  takeHitAudio: {fileID: 8300000, guid: 0d907ea0abfea4d499a48544c2418957, type: 3}
+  levelUpAudio: {fileID: 8300000, guid: fc95c51fb5ee0d7419e7a3fb29e26248, type: 3}
+  kamikazeAudio: {fileID: 8300000, guid: 04eef5fb45352a4419aae209e830864e, type: 3}
+  dieAudio: {fileID: 8300000, guid: 9d86d327b3b9618499f8d9c9553336e3, type: 3}

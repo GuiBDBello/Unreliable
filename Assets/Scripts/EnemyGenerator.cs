@@ -5,12 +5,15 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     public GameObject enemy;
+
     private bool isWaiting;
+    private GameObject[] spawnPoints;
 
     // Start is called before the first frame update
     void Start()
     {
         this.isWaiting = true;
+        this.spawnPoints = GameObject.FindGameObjectsWithTag(Tags.Spawn);
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         this.isWaiting = false;
         yield return new WaitForSeconds(waitTime);
-        Instantiate(enemy, this.transform.position, Quaternion.identity);
+        Instantiate(enemy, RandomizeSpawn(), Quaternion.identity);
         this.isWaiting = true;
     }
 
@@ -31,5 +34,10 @@ public class EnemyGenerator : MonoBehaviour
     {
         if (this.isWaiting)
             this.StartCoroutine(this.SpawnEnemyCoroutine(5F));
+    }
+
+    private Vector3 RandomizeSpawn()
+    {
+        return spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
     }
 }

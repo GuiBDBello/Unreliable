@@ -11,6 +11,7 @@ TagManager:
   - Music
   - Notification
   - Score
+  - Spawn
   layers:
   - Default
   - TransparentFX

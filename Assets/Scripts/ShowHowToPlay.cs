@@ -31,7 +31,7 @@ public class ShowHowToPlay : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
     public void OnPointerExit(PointerEventData eventData)
     {
         this.gameObject.GetComponent<Image>().color = Color.white;
-        this.gameObject.GetComponentInChildren<Text>().color = Color.black;
+        this.gameObject.GetComponentInChildren<Text>().color = new Color(0F, 0F, 0F, 0.4F);
 
         commands.SetActive(false);
         enemies.SetActive(false);

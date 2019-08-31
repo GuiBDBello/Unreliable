@@ -10,6 +10,12 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed;
     public float kamikazeSpeed;
     public GameObject enemyBullet;
+    public AudioClip spawnAudio;
+    public AudioClip shootAudio;
+    public AudioClip takeHitAudio;
+    public AudioClip levelUpAudio;
+    public AudioClip kamikazeAudio;
+    public AudioClip dieAudio;
 
     private float moveDistance;
     private bool isShooting;
@@ -17,19 +23,21 @@ public class EnemyController : MonoBehaviour
     private GameObject target;
     private Renderer renderer;
     private Rigidbody rigidbody;
+    private AudioSource audio;
 
     private void Start()
     {
         this.enemyLevel = 1;
-        this.moveSpeed = 5F;
         this.moveSpeed = Random.Range(moveSpeed / 2F, moveSpeed * 2F);
-        this.kamikazeSpeed = 5000F;
         this.isShooting = false;
         this.isKamikazeing = false;
 
         this.target = GameObject.FindGameObjectWithTag(Tags.Player);
         this.renderer = this.GetComponent<Renderer>();
         this.rigidbody = this.GetComponent<Rigidbody>();
+        this.audio = GetComponent<AudioSource>();
+
+        this.audio.PlayOneShot(spawnAudio);
     }
 
     private void Update()
@@ -73,11 +81,14 @@ public class EnemyController : MonoBehaviour
                 if (other.GetComponent<EnemyController>().enemyLevel == 1)
                 {
                     UIController.score += 10;
+                    this.audio.PlayOneShot(dieAudio);
                 } else if (other.GetComponent<EnemyController>().enemyLevel == 2)
                 {
                     UIController.score += 50;
+                    this.audio.PlayOneShot(dieAudio);
                 } else {
                     UIController.score += 250;
+                    this.audio.PlayOneShot(dieAudio);
                 }
                 UIController.UpdateScore();
                 Destroy(other);
@@ -96,6 +107,7 @@ public class EnemyController : MonoBehaviour
         this.isShooting = true;
         yield return new WaitForSeconds(waitTime);
         Destroy(Instantiate(enemyBullet, (this.transform.position + this.transform.forward), Quaternion.identity), 5F);
+        this.audio.PlayOneShot(shootAudio);
         this.isShooting = false;
     }
 
@@ -110,6 +122,7 @@ public class EnemyController : MonoBehaviour
         this.isKamikazeing = true;
         yield return new WaitForSeconds(waitTime);
         this.rigidbody.AddForce((target.transform.position - this.transform.position).normalized * kamikazeSpeed);
+        this.audio.PlayOneShot(kamikazeAudio, 0.4F);
         this.isKamikazeing = false;
     }
 
@@ -124,7 +137,10 @@ public class EnemyController : MonoBehaviour
     private void Upgrade()
     {
         if (this.enemyLevel < 3)
+        {
             this.enemyLevel++;
+            this.audio.PlayOneShot(levelUpAudio);
+        }
 
         switch (this.enemyLevel)
         {
@@ -147,6 +163,7 @@ public class EnemyController : MonoBehaviour
         if (this.renderer.material.color != Color.gray)
         {
             this.renderer.material.color = new Color(this.renderer.material.color.r, this.renderer.material.color.g - 0.2F, this.renderer.material.color.b);
+            this.audio.PlayOneShot(takeHitAudio);
         }
     }
 }

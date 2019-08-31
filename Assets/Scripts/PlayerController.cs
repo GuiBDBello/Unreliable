@@ -15,9 +15,13 @@ public class PlayerController : MonoBehaviour
     public float gravity = 20.0f;
     public GameObject playerBullet;
     public Text textHealth;
+    public AudioClip shootAudio;
+    public AudioClip takeHitAudio;
+    public AudioClip dieAudio;
 
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
+    private AudioSource audio;
 
     // Start is called before the first frame update
     private void Start()
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
         this.health = 3;
         textHealth.text = "Health: " + this.health.ToString();
         this.isDead = false;
+        this.audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -67,6 +72,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + this.characterController.radius);
         Destroy(Instantiate(playerBullet, position, Quaternion.identity), 5F);
+
+        this.audio.PlayOneShot(shootAudio);
     }
 
     public void TakeHit(Vector3 direction)
@@ -75,10 +82,14 @@ public class PlayerController : MonoBehaviour
 
         this.health--;
         this.textHealth.text = "Health: " + this.health.ToString();
+
+        this.audio.PlayOneShot(shootAudio);
     }
 
     private void GameOver()
     {
         this.isDead = true;
+
+        this.audio.PlayOneShot(dieAudio);
     }
 }

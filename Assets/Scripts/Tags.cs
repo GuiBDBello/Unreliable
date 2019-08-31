@@ -11,4 +11,5 @@ public class Tags : MonoBehaviour
     public const string Player = "Player";
     public const string Scenario = "Scenario";
     public const string Score = "Score";
+    public const string Spawn = "Spawn";
 }
