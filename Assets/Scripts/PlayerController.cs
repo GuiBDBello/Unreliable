@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + this.characterController.radius);
-        Instantiate(playerBullet, position, Quaternion.identity);
+        Destroy(Instantiate(playerBullet, position, Quaternion.identity), 5F);
     }
 
     public void TakeHit(Vector3 direction)

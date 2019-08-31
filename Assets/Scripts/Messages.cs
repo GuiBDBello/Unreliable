@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class Messages : MonoBehaviour
 {
-    public const string hello = "\"The Game\": Shoot to kill the Enemies!";
+    public const string hello = "Hello! I am \"The Game\"!";
 
-    public const string message01 = "My cubes just want a hug!";
-    public const string message02 = "";
-    public const string message03 = "";
-    public const string message04 = "Just give up! You can't kill my cubes!";
-    public const string message05 = "It's impossible to kill my cubes!";
-    public const string message06 = "";
-    public const string message07 = "";
-    public const string message08 = "";
-    public const string message09 = "";
-    public const string message10 = "";
+    public string[] messages;
 
-    public const string gameplay01 = "Shoot to kill the Enemies!";
-    public const string gameplay02 = "You don't move pressing the WASD keys!";
-    public const string gameplay03 = "You don't jump pressing the space key!";
-    public const string gameplay04 = "Shoot the cubes to weaken them!";
-    public const string gameplay05 = "";
-    public const string gameplay06 = "";
-    public const string gameplay07 = "";
-    public const string gameplay08 = "";
-    public const string gameplay09 = "";
-    public const string gameplay10 = "";
+    private void Start()
+    {
+        messages = new string[10];
+
+        messages[0] = "Shoot to kill The Cubes!";
+        messages[1] = "My cubes just want a hug!";
+        messages[2] = "The Cubes can't kill themselves!";
+        messages[3] = "Just give up! You can't kill The Cubes!";
+        messages[4] = "It's impossible to kill The Cubes!";
+        messages[5] = "Don't even bother trying to make The Cubes hit themselves.";
+        messages[6] = "Shoot the cubes to weaken them!";
+        messages[7] = "Hug The Cubes to gain health!";
+        messages[8] = "The more you shoot The Cubes, more friendly they get!";
+        messages[9] = "You can't stop The Cubes!";
+    }
 }

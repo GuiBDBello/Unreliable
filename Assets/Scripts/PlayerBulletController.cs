@@ -6,18 +6,20 @@ public class PlayerBulletController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     private Transform cameraTransform;
+    private Vector3 direction;
 
     // Start is called before the first frame update
     private void Start()
     {
         this.rigidbody = GetComponent<Rigidbody>();
         this.cameraTransform = GameObject.FindGameObjectWithTag(Tags.MainCamera).transform;
+        this.direction = this.cameraTransform.forward;
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        this.rigidbody.MovePosition(this.transform.position + this.cameraTransform.forward);
+        this.rigidbody.MovePosition(this.transform.position + this.direction);
     }
 
     private void OnTriggerEnter(Collider other)

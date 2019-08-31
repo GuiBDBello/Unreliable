@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
     {
         this.isShooting = true;
         yield return new WaitForSeconds(waitTime);
-        Instantiate(enemyBullet, (this.transform.position + this.transform.forward), Quaternion.identity);
+        Destroy(Instantiate(enemyBullet, (this.transform.position + this.transform.forward), Quaternion.identity), 5F);
         this.isShooting = false;
     }
 
