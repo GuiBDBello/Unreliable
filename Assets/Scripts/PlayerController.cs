@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector]
+    public int health;
+    [HideInInspector]
     public bool isDead;
 
     public float speed = 10.0f;
@@ -14,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public GameObject playerBullet;
     public Text textHealth;
 
-    private int health;
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
 

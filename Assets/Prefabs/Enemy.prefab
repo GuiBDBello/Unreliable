@@ -123,6 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLevel: 0
   moveSpeed: 5
-  kamikazeSpeed: 5000
-  enemyBullet: {fileID: 1863410909797348751, guid: c94d5f32b59904e43989d9cc87c1be84,
+  kamikazeSpeed: 3000
+  enemyBullet: {fileID: 1531129357254767843, guid: c94d5f32b59904e43989d9cc87c1be84,
     type: 3}

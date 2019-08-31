@@ -21,8 +21,10 @@ public class EnemyBulletController : MonoBehaviour
         this.rigidbody.MovePosition(this.transform.position + this.transform.forward);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        GameObject other = collision.gameObject;
+
         switch (other.tag)
         {
             case Tags.Player:
@@ -33,7 +35,7 @@ public class EnemyBulletController : MonoBehaviour
                 if (other.GetComponent<EnemyController>().enemyLevel == 1)
                 {
                     UIController.score += 25;
-                } else if (other.GetComponent<EnemyController>().enemyLevel == 1)
+                } else if (other.GetComponent<EnemyController>().enemyLevel == 2)
                 {
                     UIController.score += 75;
                 } else
@@ -42,9 +44,6 @@ public class EnemyBulletController : MonoBehaviour
                 }
                 UIController.UpdateScore();
                 Destroy(other.gameObject);
-                Destroy(this.gameObject);
-                break;
-            case Tags.Scenario:
                 Destroy(this.gameObject);
                 break;
             default:
