@@ -100,6 +100,11 @@ public class UIController : MonoBehaviour
         this.cameraController.enabled = true;
     }
 
+    public void OnButtonHowToPlayPressed()
+    {
+        Debug.Log("Pertou");
+    }
+
     private void ShowGameOverMenu()
     {
         if (playerController.isDead)

@@ -20,7 +20,7 @@ public class Messages : MonoBehaviour
     public const string gameplay01 = "Shoot to kill the Enemies!";
     public const string gameplay02 = "You don't move pressing the WASD keys!";
     public const string gameplay03 = "You don't jump pressing the space key!";
-    public const string gameplay04 = "";
+    public const string gameplay04 = "Shoot the cubes to weaken them!";
     public const string gameplay05 = "";
     public const string gameplay06 = "";
     public const string gameplay07 = "";
