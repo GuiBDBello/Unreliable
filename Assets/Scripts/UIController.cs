@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 1;
+        UIController.score = 0;
 
         mainMenu.SetActive(true);
         playerHUD.SetActive(false);
