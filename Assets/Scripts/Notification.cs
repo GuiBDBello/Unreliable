@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Notification : MonoBehaviour
 {
     public Transform hideTransform;
     public Transform showTransform;
+    public Messages messages;
+    public Text textMessage;
     
     private float journeyLength;
     private bool isShowing;
@@ -13,6 +16,7 @@ public class Notification : MonoBehaviour
     private void Start()
     {
         this.isShowing = false;
+        this.textMessage.text = "Hello! I am \"The Game\"!";
     }
 
     // This method should be called inside an Update
@@ -38,6 +42,7 @@ public class Notification : MonoBehaviour
         this.StartCoroutine(this.HideNotificationCoroutine(duration));
 
         yield return new WaitForSeconds(waitTime * 6);
+        this.RandomizeMessage();
         this.isShowing = false;
     }
 
@@ -50,5 +55,10 @@ public class Notification : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    private void RandomizeMessage()
+    {
+        this.textMessage.text = messages.messages[Random.Range(0, messages.messages.Length)];
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Messages : MonoBehaviour
 {
-    public const string hello = "Hello! I am \"The Game\"!";
-
     public string[] messages;
 
     private void Start()
