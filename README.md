@@ -19,9 +19,9 @@ Game page on itch.io: https://guibdbello.itch.io/unreliable
 
 #### Enemies
 
-- **Level 1**: Move towards you. Is the fastest enemy.
+- **Level 1**: Moves towards you. Is the fastest enemy.
 - **Level 2**: Can shoot you. It is slower than *Level 1* but faster than *Level 3*.
-- **Level 3**: Move slower than *Levels 1 and 3*, but will **dash** very fast in your direction every few seconds.
+- **Level 3**: Moves slower than *Levels 1 and 3*, but will **dash** very fast in your direction every few seconds.
 
 ## About
 
@@ -38,7 +38,8 @@ Theme: **The Game Is A Liar**.
 ### Installation
 
 1. Clone repository: `git clone https://github.com/GuiBDBello/Unreliable.git`.
-2. Open the project in Unity Hub: `ADD > Select the folder you just cloned`.
+2. Add the project to Unity Hub: `ADD > Select the folder you just cloned`.
+3. Select the project to open.
 
 ### Development
 
@@ -52,4 +53,4 @@ Theme: **The Game Is A Liar**.
 
 ### Build
 
-1. `File > Build Settings... > Build`
+1. In Unity, with the project open, go to `File > Build Settings...` then select `Build`.
